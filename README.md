@@ -13,6 +13,8 @@ A curated, growing library of agent skills that turn one-off prompts into repeat
 | [`ai-news`](./ai-news/SKILL.md) | Productivity | Daily 5-category curated AI news briefing with dry-humor summary and verified markdown citations. | Web search capability |
 | [`morning-briefing`](./morning-briefing/SKILL.md) | Productivity | Personalized daily dashboard for stock price, FX rate, and weather with market move rationale. | Web search capability |
 | [`paper-summary`](./paper-summary/SKILL.md) | Research & Analysis | Structured lay-language summary of any research paper: problem, method, key results, limitations, and why it matters. Configurable audience level and optional focus lens. | Web fetch capability |
+| [`linkedin-post`](./linkedin-post/SKILL.md) | Content & Communication | Drafts ready-to-publish LinkedIn posts (insight, announcement, or share) in a configurable voice and length, with craft notes explaining key decisions. | None |
+| [`skill-finder`](./skill-finder/SKILL.md) | Productivity | Searches popular agentic skill indexes (agenticskills.io, mcpservers.org, mcpmarket.com) and recommends ranked matching skills for any described task, with rationale and ready-to-use activation prompts. | Web fetch capability |
 
 ---
 
