@@ -1,92 +1,93 @@
 # AGENTS.md
 
-Guidance and standards for AI coding agents operating on the `runbooks-for-agents` repository.
+This file provides guidance to agents when working with code in this repository.
+
+`runbooks-for-agents` is a library of structured, versioned **Agent Skills**. Each skill is a `SKILL.md` file that turns open-ended prompts into deterministic, repeatable procedures agents can run interactively or unattended.
 
 ---
 
-## 1. Repository Overview
-
-`runbooks-for-agents` is an open-source library of structured, versioned **Agent Skills** (runbooks). Each skill turns open-ended, one-off prompts into deterministic, high-quality, and repeatable procedures that agents can execute interactively or unattended (e.g., via scheduled cron tasks).
-
-### Repository Structure
+## Repository Structure
 
 ```text
 runbooks-for-agents/
 ├── <skill-name>/
-│   └── SKILL.md       # Skill definition, frontmatter, configuration & instructions
-├── LICENSE            # MIT License
-├── README.md          # Public documentation & skills directory table
-└── AGENTS.md          # Agent contributor and maintenance instructions
+│   └── SKILL.md       # The skill file — always named SKILL.md, never <skill-name>.md
+├── README.md          # Skills directory table — must be updated for every new/changed skill
+└── AGENTS.md
 ```
 
 ---
 
-## 2. Skill Design & Authoring Standards
+## Skill Authoring Standards
 
-When adding or modifying skills in this repository, always follow these core standards:
-
-### A. Frontmatter Schema
-Every skill must start with valid YAML frontmatter containing:
-- `name`: Lowercase kebab-case identifier (matches folder name, e.g. `ai-news`).
-- `description`: A comprehensive description defining:
-  1. What the skill produces.
-  2. The exact trigger phrases (both formal and casual/multilingual).
-  3. Tool/capability dependencies (e.g., web search tools, visualization tools).
-  4. Instruction to invoke the skill instead of improvising ad-hoc responses.
+### Frontmatter (required)
+Every `SKILL.md` must open with YAML frontmatter using the `>-` block scalar for `description`:
 
 ```yaml
 ---
-name: skill-name
+name: skill-name          # lowercase kebab-case, must match directory name
 description: >-
-  Produces [output description]. Includes [key sections or features]. Requires
-  [dependencies, e.g., web search tool]. Use whenever the user asks for
-  ["trigger 1", "trigger 2", or similar phrasing in any language]. Always use
+  Produces [output]. Requires [tool deps]. Use whenever the user asks for
+  ["trigger 1", "trigger 2", similar phrasing in any language]. Always use
   this skill rather than improvising an ad hoc response.
 ---
 ```
 
-### B. In-File Configuration Block
-Skills designed with customizable parameters should include an easy-to-edit configuration block near the top of `SKILL.md`:
-- Use commented YAML-like key-value pairs.
-- Provide clear defaults and fallback behaviors when keys are left blank.
-- Specify expected data types or comma-separated formats.
+The `description` must cover: what the skill produces, exact trigger phrases (formal + casual + multilingual), tool/capability dependencies, and an explicit directive to invoke the skill instead of improvising.
 
-### C. Zero-Hallucination & Grounding Principles
-- For volatile or real-time data (news, stock prices, weather, exchange rates), skills **must explicitly prohibit answering from training memory**.
-- Mandate live web search and deep fetch steps before generation.
-- Require fully qualified, clickable markdown links (`[Source](https://...)`) for all citations — never bare text or placeholder domains.
-- Provide explicit fallback guidance when no fresh information is found (e.g., explicitly reporting a quiet news cycle rather than inventing stories or using stale data).
+### Configuration Block (when parameters exist)
+Place an easy-to-edit config block immediately after the frontmatter, before any headings. Two accepted styles — use whichever fits the skill:
 
-### D. Strict Output Formatting
-- Structure outputs with explicit markdown headings, delimiters (`---`), and tables where appropriate.
-- Include a template example in the skill instructions demonstrating the expected shape and tone of the response.
-- Keep tone rules scoped (e.g., humorous intro hooks vs. factual body sections).
+**Fenced code block** (simple key/value, as in `morning-briefing`, `paper-summary`):
+```
+stock_ticker: ""   # e.g. "IBM" — leave blank to skip this section
+```
 
-### E. Unattended Execution Friendly
-- Skills must work seamlessly when triggered by background schedules or autonomous routines.
-- Explicitly instruct the agent **not to ask clarifying questions** when running unattended — gather available data and produce the finalized output directly.
+**HTML comment block** (richer inline docs, as in `troubleshoot-agent-issues`):
+```
+<!-- ====================================================
+  key: default   # explanation
+  ==================================================== -->
+```
+
+Provide clear defaults and fallback behavior for every key. Never leave a key undocumented.
+
+### Zero-Hallucination Grounding
+- Skills that use volatile data (news, prices, weather) **must explicitly prohibit answering from training memory** and mandate a live web-search step first.
+- All citations must be fully qualified clickable markdown links — never bare URLs or placeholder domains.
+- Provide explicit fallback messaging when no fresh data is found (do not invent or use stale data).
+
+### Output Formatting
+- Use explicit markdown headings, `---` delimiters, and tables where appropriate.
+- Include an output template example inside the skill to anchor tone and shape.
+
+### Unattended Execution
+- Skills must never stall waiting for user input when triggered by a schedule or automation.
+- Add an explicit **Unattended mode** callout to any step that would normally pause for clarification: infer from available context, apply a documented default, and continue.
+- The `description` frontmatter must also state the unattended behavior so the agent knows before reading the body.
 
 ---
 
-## 3. Workflows for Agents Working on This Repo
+## Workflows for Agents
 
 ### Adding a New Skill
-1. Create a directory named `<skill-name>/`.
-2. Author `<skill-name>/SKILL.md` following the standards above.
-3. Update [`README.md`](README.md:1) by adding the new skill to the **📦 Skills Directory** table (Skill name, Category, Description, and Requirements).
+1. Create `<skill-name>/SKILL.md` — the file **must** be named `SKILL.md`.
+2. Follow all authoring standards above.
+3. Add a row to the **📦 Skills Directory** table in [`README.md`](README.md) (columns: Skill, Category, Description, Requirements).
 
 ### Modifying an Existing Skill
-1. Preserve structural consistency and existing configuration keys unless deliberately refactoring.
-2. Ensure triggers remain robust across phrasing variations and languages.
-3. If dependencies or major capabilities change, update the corresponding entry in [`README.md`](README.md:1).
+1. Preserve existing config keys unless deliberately refactoring.
+2. Keep triggers robust across phrasing variations and languages.
+3. Update the [`README.md`](README.md) table row if category, description, or requirements change.
 
 ---
 
-## 4. Quality Checklist
+## Quality Checklist
 
-Before finalizing any new or updated skill:
-- [ ] Directory name matches the frontmatter `name`.
-- [ ] YAML frontmatter is valid and contains a detailed `description` with trigger phrases.
-- [ ] Markdown syntax renders cleanly.
-- [ ] Any required tool capabilities (e.g., web search, MCP) are clearly noted.
-- [ ] [`README.md`](README.md:1) skills index table is updated and accurate.
+- [ ] Directory name matches frontmatter `name`.
+- [ ] File is named `SKILL.md` (not `<skill-name>.md` or anything else).
+- [ ] `description` uses `>-` block scalar and includes trigger phrases + unattended behavior note.
+- [ ] Config block present (if skill has parameters), with all keys documented.
+- [ ] Markdown renders cleanly.
+- [ ] Tool/capability dependencies noted in frontmatter `description`.
+- [ ] [`README.md`](README.md) Skills Directory table updated.

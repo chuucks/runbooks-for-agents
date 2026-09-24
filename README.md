@@ -15,6 +15,7 @@ A curated, growing library of agent skills that turn one-off prompts into repeat
 | [`paper-summary`](./paper-summary/SKILL.md) | Research & Analysis | Structured lay-language summary of any research paper: problem, method, key results, limitations, and why it matters. Configurable audience level and optional focus lens. | Web fetch capability |
 | [`linkedin-post`](./linkedin-post/SKILL.md) | Content & Communication | Drafts ready-to-publish LinkedIn posts (insight, announcement, or share) in a configurable voice and length, with craft notes explaining key decisions. | None |
 | [`skill-finder`](./skill-finder/SKILL.md) | Productivity | Searches popular agentic skill indexes (agenticskills.io, mcpservers.org, mcpmarket.com) and recommends ranked matching skills for any described task, with rationale and ready-to-use activation prompts. | Web fetch capability |
+| [`troubleshoot-agent-issues`](./troubleshoot-agent-issues/SKILL.md) | Engineering | Platform-agnostic agent debugger — gathers the issue description, scans trace logs, identifies root causes (tool schema mismatches, routing failures, context loss, auth errors, etc.), and proposes or applies targeted fixes across LangChain, CrewAI, AutoGen, OpenAI Assistants, IBM watsonx Orchestrate, Vertex AI, Azure AI Foundry, and custom pipelines. | None |
 
 ---
 
