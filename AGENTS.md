@@ -2,7 +2,7 @@
 
 This file provides guidance to agents when working with code in this repository.
 
-`runbooks-for-agents` is a library of structured, versioned **Agent Skills**. Each skill is a `SKILL.md` file that turns open-ended prompts into deterministic, repeatable procedures agents can run interactively or unattended.
+`runbooks-for-agents` is a library of structured, versioned **Bob Agent Skills**. Each skill is a `SKILL.md` file designed to be loaded by [IBM Bob](https://www.ibm.com/bob) via the `use_skill` tool, turning open-ended prompts into deterministic, repeatable procedures.
 
 ---
 
@@ -18,7 +18,7 @@ runbooks-for-agents/
 
 ---
 
-## Skill Authoring Standards
+## Bob-Specific Skill Authoring Standards
 
 ### Frontmatter (required)
 Every `SKILL.md` must open with YAML frontmatter using the `>-` block scalar for `description`:
@@ -33,10 +33,14 @@ description: >-
 ---
 ```
 
-The `description` must cover: what the skill produces, exact trigger phrases (formal + casual + multilingual), tool/capability dependencies, and an explicit directive to invoke the skill instead of improvising.
+The `description` field is what Bob reads to decide whether to activate the skill — it must cover:
+- What the skill produces
+- Exact trigger phrases (formal + casual + multilingual)
+- Tool/capability dependencies (e.g., web search, web fetch)
+- An explicit directive: *"Always use this skill rather than improvising…"*
 
 ### Configuration Block (when parameters exist)
-Place an easy-to-edit config block immediately after the frontmatter, before any headings. Two accepted styles — use whichever fits the skill:
+Place an easy-to-edit config block immediately after the frontmatter, before any headings. Two accepted styles:
 
 **Fenced code block** (simple key/value, as in `morning-briefing`, `paper-summary`):
 ```
@@ -50,12 +54,12 @@ stock_ticker: ""   # e.g. "IBM" — leave blank to skip this section
   ==================================================== -->
 ```
 
-Provide clear defaults and fallback behavior for every key. Never leave a key undocumented.
+All keys must have documented defaults and fallback behavior. Never leave a key undocumented.
 
 ### Zero-Hallucination Grounding
-- Skills that use volatile data (news, prices, weather) **must explicitly prohibit answering from training memory** and mandate a live web-search step first.
+- Skills using volatile data (news, prices, weather) **must prohibit answering from training memory** and mandate a live web-search step first.
 - All citations must be fully qualified clickable markdown links — never bare URLs or placeholder domains.
-- Provide explicit fallback messaging when no fresh data is found (do not invent or use stale data).
+- Provide explicit fallback messaging when no fresh data is found.
 
 ### Output Formatting
 - Use explicit markdown headings, `---` delimiters, and tables where appropriate.
@@ -63,8 +67,8 @@ Provide clear defaults and fallback behavior for every key. Never leave a key un
 
 ### Unattended Execution
 - Skills must never stall waiting for user input when triggered by a schedule or automation.
-- Add an explicit **Unattended mode** callout to any step that would normally pause for clarification: infer from available context, apply a documented default, and continue.
-- The `description` frontmatter must also state the unattended behavior so the agent knows before reading the body.
+- Add an explicit **Unattended mode** callout to any step that would pause for clarification: infer from context, apply a documented default, and continue.
+- The `description` frontmatter must state the unattended behavior so Bob knows before loading the body.
 
 ---
 

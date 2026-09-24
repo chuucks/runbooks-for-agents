@@ -1,0 +1,17 @@
+# .bobignore
+# Files and directories Bob should not index or surface as skill candidates
+
+# Git internals
+.git/
+
+# Editor configs
+.vscode/
+
+# OS artifacts
+.DS_Store
+
+# Bob's own configuration (not skills)
+.bob/
+
+# License and legal
+LICENSE

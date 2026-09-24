@@ -1,8 +1,10 @@
- # runbooks-for-agents
+# runbooks-for-agents
 
-> Versioned agent skills for everyday productivity and engineering work.
+> Bob Agent Skills — versioned, reusable skills for IBM Bob.
 
-A curated, growing library of agent skills that turn one-off prompts into repeatable, structured procedures. Built to run reliably both in interactive chat and in unattended scheduled workflows.
+A curated, growing library of **Bob Agent Skills** — structured `SKILL.md` files loaded by [IBM Bob](https://www.ibm.com/bob) via the `use_skill` tool. Each skill turns a one-off prompt into a repeatable, deterministic procedure that runs reliably in both interactive chat and unattended scheduled workflows.
+
+> **This library is designed for IBM Bob.** Skills are activated inside a Bob session with `use_skill("skill-name")`. They are not compatible with other agent frameworks out of the box.
 
 ---
 
@@ -29,7 +31,15 @@ runbooks-for-agents/
 │   └── SKILL.md
 ├── morning-briefing/
 │   └── SKILL.md
-├── AGENTS.md
+├── .bob/                   # Bob-specific mode rules (not skills)
+│   ├── rules-agent/
+│   │   └── AGENTS.md
+│   ├── rules-ask/
+│   │   └── AGENTS.md
+│   └── rules-plan/
+│       └── AGENTS.md
+├── .bobignore              # Files Bob should not index
+├── AGENTS.md               # Agent authoring guidance
 ├── LICENSE
 └── README.md
 ```
@@ -39,9 +49,12 @@ runbooks-for-agents/
 ## 🤝 Contributing & Standards
 
 Every skill in this repo adheres to:
-- **Zero Hallucination Grounding**: Always mandates fresh web lookups for volatile data (news, prices, weather) with full source citations.
-- **Strict Output Consistency**: Predictable schemas, tables, and fallback messaging for slow news days.
-- **Unattended Execution Friendly**: Self-contained instructions that never stall asking interactive questions when run via automated schedules.
+- **Bob-native format**: YAML frontmatter with `>-` description scalar, loaded via Bob's `use_skill` tool.
+- **Zero Hallucination Grounding**: Volatile-data skills always mandate fresh web lookups with full source citations — never answered from training memory.
+- **Strict Output Consistency**: Predictable schemas, tables, and fallback messaging for every run.
+- **Unattended Execution Friendly**: Self-contained instructions that never stall asking interactive questions when run via Bob's scheduled tasks.
+
+See [`AGENTS.md`](AGENTS.md) for the full skill authoring standard.
 
 ---
 
