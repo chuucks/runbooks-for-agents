@@ -1,4 +1,4 @@
-# runbooks-for-agents
+# runbooks-for-ibm-bob
 
 > Bob Agent Skills — versioned, reusable skills for IBM Bob.
 
@@ -26,7 +26,7 @@ A curated, growing library of **Bob Agent Skills** — structured `SKILL.md` fil
 Each skill lives in its own directory with a standard `SKILL.md` file containing YAML frontmatter and clear operational instructions:
 
 ```text
-runbooks-for-agents/
+runbooks-for-ibm-bob/
 ├── ai-news/
 │   └── SKILL.md
 ├── morning-briefing/

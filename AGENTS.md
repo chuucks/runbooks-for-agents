@@ -2,14 +2,14 @@
 
 This file provides guidance to agents when working with code in this repository.
 
-`runbooks-for-agents` is a library of structured, versioned **Bob Agent Skills**. Each skill is a `SKILL.md` file designed to be loaded by [IBM Bob](https://www.ibm.com/bob) via the `use_skill` tool, turning open-ended prompts into deterministic, repeatable procedures.
+`runbooks-for-ibm-bob` is a library of structured, versioned **Bob Agent Skills**. Each skill is a `SKILL.md` file designed to be loaded by [IBM Bob](https://www.ibm.com/bob) via the `use_skill` tool, turning open-ended prompts into deterministic, repeatable procedures.
 
 ---
 
 ## Repository Structure
 
 ```text
-runbooks-for-agents/
+runbooks-for-ibm-bob/
 ├── <skill-name>/
 │   └── SKILL.md       # The skill file — always named SKILL.md, never <skill-name>.md
 ├── README.md          # Skills directory table — must be updated for every new/changed skill
