@@ -12,12 +12,12 @@ A curated, growing library of **Bob Agent Skills** — structured `SKILL.md` fil
 
 | Skill | Category | Description | Requirements |
 |---|---|---|---|
-| [`ai-news`](./ai-news/SKILL.md) | Productivity | Daily 5-category curated AI news briefing with dry-humor summary and verified markdown citations. | Web search capability |
-| [`morning-briefing`](./morning-briefing/SKILL.md) | Productivity | Personalized daily dashboard for stock price, FX rate, and weather with market move rationale. | Web search capability |
-| [`paper-summary`](./paper-summary/SKILL.md) | Research & Analysis | Structured lay-language summary of any research paper: problem, method, key results, limitations, and why it matters. Configurable audience level and optional focus lens. | Web fetch capability |
-| [`linkedin-post`](./linkedin-post/SKILL.md) | Content & Communication | Drafts ready-to-publish LinkedIn posts (insight, announcement, or share) in a configurable voice and length, with craft notes explaining key decisions. | None |
-| [`skill-finder`](./skill-finder/SKILL.md) | Productivity | Searches popular agentic skill indexes (agenticskills.io, mcpservers.org, mcpmarket.com) and recommends ranked matching skills for any described task, with rationale and ready-to-use activation prompts. | Web fetch capability |
-| [`troubleshoot-agent-issues`](./troubleshoot-agent-issues/SKILL.md) | Engineering | Platform-agnostic agent debugger — gathers the issue description, scans trace logs, identifies root causes (tool schema mismatches, routing failures, context loss, auth errors, etc.), and proposes or applies targeted fixes across LangChain, CrewAI, AutoGen, OpenAI Assistants, IBM watsonx Orchestrate, Vertex AI, Azure AI Foundry, and custom pipelines. | None |
+| [`ai-news`](./.bob/skills/ai-news/SKILL.md) | Productivity | Daily 5-category curated AI news briefing with dry-humor summary and verified markdown citations. | Web search capability |
+| [`morning-briefing`](./.bob/skills/morning-briefing/SKILL.md) | Productivity | Personalized daily dashboard for stock price, FX rate, and weather with market move rationale. | Web search capability |
+| [`paper-summary`](./.bob/skills/paper-summary/SKILL.md) | Research & Analysis | Structured lay-language summary of any research paper: problem, method, key results, limitations, and why it matters. Configurable audience level and optional focus lens. | Web fetch capability |
+| [`linkedin-post`](./.bob/skills/linkedin-post/SKILL.md) | Content & Communication | Drafts ready-to-publish LinkedIn posts (insight, announcement, or share) in a configurable voice and length, with craft notes explaining key decisions. | None |
+| [`skill-finder`](./.bob/skills/skill-finder/SKILL.md) | Productivity | Searches popular agentic skill indexes (agenticskills.io, mcpservers.org, mcpmarket.com) and recommends ranked matching skills for any described task, with rationale and ready-to-use activation prompts. | Web fetch capability |
+| [`troubleshoot-agent-issues`](./.bob/skills/troubleshoot-agent-issues/SKILL.md) | Engineering | Platform-agnostic agent debugger — gathers the issue description, scans trace logs, identifies root causes (tool schema mismatches, routing failures, context loss, auth errors, etc.), and proposes or applies targeted fixes across LangChain, CrewAI, AutoGen, OpenAI Assistants, IBM watsonx Orchestrate, Vertex AI, Azure AI Foundry, and custom pipelines. | None |
 
 ---
 
@@ -27,11 +27,20 @@ Each skill lives in its own directory with a standard `SKILL.md` file containing
 
 ```text
 runbooks-for-ibm-bob/
-├── ai-news/
-│   └── SKILL.md
-├── morning-briefing/
-│   └── SKILL.md
-├── .bob/                   # Bob-specific mode rules (not skills)
+├── .bob/
+│   ├── skills/             # All skills live here
+│   │   ├── ai-news/
+│   │   │   └── SKILL.md
+│   │   ├── linkedin-post/
+│   │   │   └── SKILL.md
+│   │   ├── morning-briefing/
+│   │   │   └── SKILL.md
+│   │   ├── paper-summary/
+│   │   │   └── SKILL.md
+│   │   ├── skill-finder/
+│   │   │   └── SKILL.md
+│   │   └── troubleshoot-agent-issues/
+│   │       └── SKILL.md
 │   ├── rules-agent/
 │   │   └── AGENTS.md
 │   ├── rules-ask/

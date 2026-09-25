@@ -10,9 +10,11 @@ This file provides guidance to agents when working with code in this repository.
 
 ```text
 runbooks-for-ibm-bob/
-├── <skill-name>/
-│   └── SKILL.md       # The skill file — always named SKILL.md, never <skill-name>.md
-├── README.md          # Skills directory table — must be updated for every new/changed skill
+├── .bob/
+│   └── skills/
+│       └── <skill-name>/
+│           └── SKILL.md   # The skill file — always named SKILL.md, never <skill-name>.md
+├── README.md              # Skills directory table — must be updated for every new/changed skill
 └── AGENTS.md
 ```
 
@@ -75,7 +77,7 @@ All keys must have documented defaults and fallback behavior. Never leave a key 
 ## Workflows for Agents
 
 ### Adding a New Skill
-1. Create `<skill-name>/SKILL.md` — the file **must** be named `SKILL.md`.
+1. Create `.bob/skills/<skill-name>/SKILL.md` — the file **must** be named `SKILL.md`.
 2. Follow all authoring standards above.
 3. Add a row to the **📦 Skills Directory** table in [`README.md`](README.md) (columns: Skill, Category, Description, Requirements).
 
